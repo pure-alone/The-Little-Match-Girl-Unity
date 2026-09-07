@@ -35,6 +35,24 @@ public static class SetupStorybook
         Debug.Log("Little Match Girl scene created at Assets/Main.unity");
     }
 
+    // Unity Build Automation calls this before exporting the player.
+    // Configure the build target's Advanced Settings -> Pre-export method as:
+    // SetupStorybook.PreExport
+    public static void PreExport()
+    {
+        Debug.Log("[CloudBuild] PreExport: ensuring Main scene exists and is enabled in Build Settings.");
+        EnsureScene();
+
+        if (!System.IO.File.Exists(ScenePath))
+            throw new System.Exception("PreExport failed: Assets/Main.unity was not created.");
+
+        EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+        Debug.Log("[CloudBuild] PreExport ready: " + ScenePath);
+    }
+
     [MenuItem("Tools/Little Match Girl/Build WebGL")]
     public static void BuildWebGL()
     {
