@@ -110,23 +110,18 @@ public class StorybookController : MonoBehaviour
 
     void CreateDecorations()
     {
-        // moon
         var moon = CreateImage("Moon", canvas.transform, new Color(1f,.90f,.60f,.95f));
         SetRect(moon.rectTransform,.70f,.68f,.86f,.77f);
-        // street / horizon
         var street = CreateImage("Street", canvas.transform,new Color(.06f,.07f,.10f,1));
         SetRect(street.rectTransform,0,0,1,.25f);
-        // stylised houses
         for(int i=0;i<5;i++)
         {
             var h = CreateImage("House"+i, canvas.transform, new Color(.09f,.10f,.16f,1));
             float x=.02f+i*.20f;
             SetRect(h.rectTransform,x,.25f,x+.16f,.50f+(i%2)*.07f);
         }
-        // warm window
         var window = CreateImage("WarmWindow", canvas.transform,new Color(1f,.58f,.20f,1));
         SetRect(window.rectTransform,.73f,.34f,.81f,.42f);
-        // girl silhouette
         var girl = CreateImage("Girl", canvas.transform,new Color(.30f,.18f,.28f,1));
         SetRect(girl.rectTransform,.38f,.30f,.58f,.58f);
     }
@@ -228,7 +223,7 @@ public class StorybookController : MonoBehaviour
         Destroy(clip,duration+.2f);
     }
 
-    Font BuiltinFont() { return Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); }
+    Font BuiltinFont() { return Resources.GetBuiltinResource<Font>("Arial.ttf"); }
 
     Image CreateImage(string name,Transform parent,Color color)
     {
